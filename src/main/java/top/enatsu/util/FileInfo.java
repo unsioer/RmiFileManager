@@ -7,8 +7,13 @@ public interface FileInfo extends Serializable {
 
     String getPath();
 
+    Boolean isDirectory();
+
+    Long getSize();
+
     byte[] getContent();
 
     void setInfo(String name, String path, byte[] content);
 
+    void setInfo(String name, String path, Boolean directory, Long size);
 }

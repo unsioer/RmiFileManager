@@ -1,5 +1,6 @@
 package top.enatsu.clientgui;
 
+import top.enatsu.util.FileInfo;
 import top.enatsu.util.FileTool;
 import top.enatsu.util.Response;
 import top.enatsu.util.ResponseImpl;
@@ -81,9 +82,9 @@ public class ToolMenu extends JPopupMenu {
             System.out.println("src:" + src);
             System.out.println("dst:" + dst);
             try {
-                File dstFile = MainFrame.fileManager.getFile(dst);
+                FileInfo dstFile = MainFrame.fileManager.getFileInfo(dst);
                 if (!dstFile.isDirectory()) dst = MainFrame.curPath;
-                dstFile = MainFrame.fileManager.getFile(dst);
+                dstFile = MainFrame.fileManager.getFileInfo(dst);
                 if (!dstFile.isDirectory()) {
                     JOptionPane.showMessageDialog(null, "目标文件夹不存在");
                     return;

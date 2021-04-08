@@ -1,5 +1,6 @@
 package top.enatsu.facade;
 
+import top.enatsu.util.FileInfo;
 import top.enatsu.util.FileInfoImpl;
 import top.enatsu.util.ResponseImpl;
 
@@ -12,6 +13,8 @@ public interface FileManager extends Remote {
     String hello() throws RemoteException;
 
     File getFile(String srcPath) throws RemoteException;
+
+    FileInfo getFileInfo(String srcPath) throws RemoteException;
 
     ResponseImpl getFileList(String srcDir) throws RemoteException;
 

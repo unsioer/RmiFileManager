@@ -3,6 +3,7 @@ package top.enatsu.server.facade;
 import org.apache.commons.io.FileUtils;
 import top.enatsu.facade.FileManager;
 import top.enatsu.server.ServerMain;
+import top.enatsu.util.FileInfo;
 import top.enatsu.util.FileInfoImpl;
 import top.enatsu.util.FileTool;
 import top.enatsu.util.ResponseImpl;
@@ -31,6 +32,18 @@ public class FileManagerImpl extends UnicastRemoteObject implements FileManager 
         }
         File file = new File(new File(ServerMain.root), srcPath);
         if (file.exists()) return file;
+        else return null;
+    }
+
+    @Override
+    public FileInfo getFileInfo(String srcPath) {
+        if (!FileTool.isPathLegal(srcPath)) {
+            return null;
+        }
+        File file = new File(new File(ServerMain.root), srcPath);
+        FileInfo fileInfo=new FileInfoImpl();
+        fileInfo.setInfo(file.getName(),"",file.isDirectory(),file.length());
+        if (file.exists()) return fileInfo;
         else return null;
     }
 
