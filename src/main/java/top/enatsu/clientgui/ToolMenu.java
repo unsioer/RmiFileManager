@@ -9,7 +9,7 @@ import java.io.*;
 
 import java.rmi.RemoteException;
 
-public class ToolBarMenu extends JPopupMenu {
+public class ToolMenu extends JPopupMenu {
     public JMenuItem mkdir = new JMenuItem("新建文件夹");
     public JMenuItem rename = new JMenuItem("重命名");
     public JMenuItem cut = new JMenuItem("剪切");
@@ -19,7 +19,7 @@ public class ToolBarMenu extends JPopupMenu {
     static String copyFrom = "";
     static boolean isCut = false;
 
-    ToolBarMenu() {
+    ToolMenu() {
         add(mkdir);
         add(rename);
         add(cut);
@@ -29,7 +29,7 @@ public class ToolBarMenu extends JPopupMenu {
 
         rename.addActionListener(actionEvent -> {
             if(MainFrame.dirView.tree.getSelectionPath()!=null) { //在某目录下，该目录不允许重命名
-                String name = JOptionPane.showInputDialog("请输入新的文件（夹）名称：");
+                String name = JOptionPane.showInputDialog(null,"请输入新的文件（夹）名称：",MainFrame.dirView.getSelectedName());
                 if (name != null && !name.isEmpty() && FileTool.isFileNameLegal(name)) {
                     try {
                         System.out.println("srcPath:"+MainFrame.dirView.getSelectedPath());

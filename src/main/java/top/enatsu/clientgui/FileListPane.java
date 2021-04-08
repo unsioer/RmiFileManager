@@ -11,11 +11,9 @@ import java.awt.event.*;
 import java.io.File;
 import java.rmi.RemoteException;
 
-import static java.awt.SystemColor.menu;
-
 public class FileListPane extends JScrollPane {
     public JTree tree;
-    public ToolBarMenu menu = new ToolBarMenu();
+    public ToolMenu menu = new ToolMenu();
 
     FileListPane(String dir) {
         ls(dir);
@@ -105,5 +103,13 @@ public class FileListPane extends JScrollPane {
             return newPath.replace("//", "/");
         }
         return "";
+    }
+
+    String getSelectedName(){
+        TreePath tp = MainFrame.dirView.tree.getSelectionPath();
+        if (tp == null) {
+            return "";
+        }
+        return tp.getLastPathComponent().toString();
     }
 }

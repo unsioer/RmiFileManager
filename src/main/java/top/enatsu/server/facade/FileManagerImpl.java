@@ -101,8 +101,13 @@ public class FileManagerImpl extends UnicastRemoteObject implements FileManager 
         if (!srcFile.exists()) {
             return new ResponseImpl(false, "文件或文件夹不存在");
         }
-        if (dstFile.exists() && !dstFile.isDirectory()) {
-            return new ResponseImpl(false, "目标路径不是文件夹");
+        if (dstFile.exists()){
+            if(!dstFile.isDirectory()) {
+                return new ResponseImpl(false, "目标路径不是文件夹");
+            }
+        }
+        if (dstFile.equals(srcFile)){
+            return new ResponseImpl(false, "目标路径与源路径相同");
         }
         try {
             FileUtils.copyToDirectory(srcFile, dstFile);
@@ -126,6 +131,8 @@ public class FileManagerImpl extends UnicastRemoteObject implements FileManager 
         if (dstFile.exists()) {
             return new ResponseImpl(false, "目标文件或文件夹已存在");
         }
+        System.out.println(srcFile.getAbsolutePath());
+        System.out.println(dstFile.getAbsolutePath());
         if (srcFile.renameTo(dstFile)) {
             return new ResponseImpl(true, "重命名成功");
         } else {
@@ -175,6 +182,7 @@ public class FileManagerImpl extends UnicastRemoteObject implements FileManager 
             }
         }
         File dstFile = new File(dstDir, info.getName());
+        BufferedOutputStream outputStream;
         try {
             if (dstFile.exists()) {
                 return new ResponseImpl(false, "文件已存在");
@@ -183,8 +191,9 @@ public class FileManagerImpl extends UnicastRemoteObject implements FileManager 
                     return new ResponseImpl(false, "创建文件失败");
                 }
             }
-            BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(dstFile));
+            outputStream = new BufferedOutputStream(new FileOutputStream(dstFile));
             outputStream.write(info.getContent());
+            outputStream.close();
             if (dstFile.exists()) {
                 return new ResponseImpl(true, "上传成功");
             }
