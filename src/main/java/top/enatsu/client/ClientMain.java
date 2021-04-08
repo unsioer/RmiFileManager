@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class ClientMain {
     public static void main(String[] args) {
         String url = "rmi://127.0.0.1:5000/file";
-        if (args[0] != null) {
+        if (args.length > 0 && args[0] != null) {
             url = args[0];
         }
         try {

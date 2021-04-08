@@ -15,7 +15,7 @@ public class ServerMain {
 
     public static void main(String[] args) {
         root = "E:\\testFolder";
-        if (args[0] != null) {
+        if (args.length > 0 && args[0] != null) {
             root = args[0];
         }
         try {
