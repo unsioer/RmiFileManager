@@ -26,6 +26,7 @@ public class FileTool {
     }
 
     public static Boolean printFileInfo(File[] files) {
+        if(files==null) return false;
         System.out.println(files.length);
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         int maxLen = 0;

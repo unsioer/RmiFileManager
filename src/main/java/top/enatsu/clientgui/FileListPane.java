@@ -30,9 +30,11 @@ public class FileListPane extends JScrollPane {
                 return;
             }
             File[] files = MainFrame.fileManager.getFileList(dir).getFiles();
-            FileTool.printFileInfo(files);
-            for (File x : files) {
-                top.add(new FileItem(x));
+            if (files != null) {
+                FileTool.printFileInfo(files);
+                for (File x : files) {
+                    top.add(new FileItem(x));
+                }
             }
             tree = new JTree(top);
 
@@ -93,13 +95,14 @@ public class FileListPane extends JScrollPane {
         if (tp == null) {
             System.out.println(MainFrame.curPath);
             return MainFrame.curPath;
-        };
-        System.out.println("tp:"+tp.toString());
+        }
+        ;
+        System.out.println("tp:" + tp.toString());
         String filename = tp.getLastPathComponent().toString();
-        System.out.println("filename:"+filename);
+        System.out.println("filename:" + filename);
         if (filename != null && !filename.isEmpty()) {
             String newPath = MainFrame.curPath + '/' + filename;
-            return newPath.replace("//","/");
+            return newPath.replace("//", "/");
         }
         return "";
     }
